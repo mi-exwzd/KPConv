@@ -1,0 +1,17 @@
+numpy==1.16.1
+h5py==2.10.0
+cython==0.29.15
+open3d-python==0.3.0
+pandas
+scikit-learn==0.21.3
+scipy==1.4.1
+PyYAML
+pylas[lazrs,laszip]
+black
+flake8
+isort
+mypy
+psutil
+matplotlib
+mayavi
+PyQt5
