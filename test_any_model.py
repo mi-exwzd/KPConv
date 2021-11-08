@@ -39,7 +39,7 @@ from datasets.S3DIS import S3DISDataset
 from datasets.Scannet import ScannetDataset
 from datasets.NPM3D import NPM3DDataset
 from datasets.Semantic3D import Semantic3DDataset
-
+from datasets.OpenGF import OpenGFDataset
 
 # ----------------------------------------------------------------------------------------------------------------------
 #
@@ -104,6 +104,8 @@ def test_caller(path, step_ind, on_val):
         dataset = NPM3DDataset(config.input_threads, load_test=(not on_val))
     elif config.dataset == 'Semantic3D':
         dataset = Semantic3DDataset(config.input_threads)
+    elif config.dataset == 'OpenGF':
+        dataset = OpenGFDataset(config.input_threads)        
     else:
         raise ValueError('Unsupported dataset : ' + config.dataset)
 
@@ -138,6 +140,8 @@ def test_caller(path, step_ind, on_val):
         model = KernelPointCNN(dataset.flat_inputs, config)
     elif config.dataset.startswith('Semantic3D'):
         model = KernelPointFCNN(dataset.flat_inputs, config)
+    elif config.dataset.startswith('OpenGF'):
+        model = KernelPointFCNN(dataset.flat_inputs, config)        
     else:
         raise ValueError('Unsupported dataset : ' + config.dataset)
 
@@ -181,6 +185,11 @@ def test_caller(path, step_ind, on_val):
             tester.test_cloud_segmentation_on_val(model, dataset)
         else:
             tester.test_cloud_segmentation(model, dataset)
+    elif config.dataset.startswith('OpenGF'):
+        if on_val:
+            tester.test_cloud_segmentation_on_val(model, dataset)
+        else:
+            tester.test_cloud_segmentation(model, dataset)            
     elif config.dataset.startswith('NPM3D'):
         if on_val:
             tester.test_cloud_segmentation_on_val(model, dataset)
@@ -223,7 +232,7 @@ if __name__ == '__main__':
     #       > 'results/Log_YYYY-MM-DD_HH-MM-SS': Directly provide the path of a trained model
     #
 
-    chosen_log = 'last_ModelNet40'
+    chosen_log = 'results/Log_2021-11-04_23-43-14'
 
     #
     #   You can also choose the index of the snapshot to load (last by default)
