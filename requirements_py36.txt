@@ -13,5 +13,4 @@ isort
 mypy
 psutil
 matplotlib
-mayavi
 PyQt5
