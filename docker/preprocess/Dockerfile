@@ -1,7 +1,7 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 
-ARG BASE_IMAGE=tensorflow/tensorflow:1.12.0-devel-gpu-py3
+ARG BASE_IMAGE=tensorflow/tensorflow:1.15.0rc2-gpu-py3-jupyter
 
 FROM $BASE_IMAGE
 
@@ -120,8 +120,8 @@ RUN pip3 --no-cache-dir install \
 RUN pip3 install tornado==6.1.0
 
 # user
-COPY --chown=jovyan:users requirements_py35.txt /tmp
-RUN pip3 install -r /tmp/requirements_py35.txt
+COPY --chown=jovyan:users requirements_py36.txt /tmp
+RUN pip3 install -r /tmp/requirements_py36.txt
 RUN docker-credential-gcr configure-docker && chown ${NB_USER}:users $HOME/.docker/config.json
 RUN chown -R ${NB_USER}:users $HOME
 
