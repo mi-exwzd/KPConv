@@ -187,9 +187,9 @@ def test_caller(path, step_ind, on_val):
             tester.test_cloud_segmentation(model, dataset)
     elif config.dataset.startswith('OpenGF'):
         if on_val:
-            tester.test_cloud_segmentation_on_val(model, dataset)
+            tester.test_cloud_segmentation_on_val(model, dataset, num_votes=4)
         else:
-            tester.test_cloud_segmentation(model, dataset)            
+            tester.test_cloud_segmentation(model, dataset, num_votes=4)
     elif config.dataset.startswith('NPM3D'):
         if on_val:
             tester.test_cloud_segmentation_on_val(model, dataset)
@@ -232,7 +232,7 @@ if __name__ == '__main__':
     #       > 'results/Log_YYYY-MM-DD_HH-MM-SS': Directly provide the path of a trained model
     #
 
-    chosen_log = 'results/Log_2021-11-04_23-43-14'
+    chosen_log = 'results/Log_2021-11-08_08-12-18'
 
     #
     #   You can also choose the index of the snapshot to load (last by default)

@@ -642,9 +642,9 @@ class ModelTrainer:
         # Choose validation smoothing parameter (0 for no smothing, 0.99 for big smoothing)
         val_smooth = 0.95
 
-        # Do not validate if dataset has no validation cloud
-        if dataset.validation_split not in dataset.all_splits:
-            return
+        # # Do not validate if dataset has no validation cloud
+        # if dataset.validation_split not in dataset.all_splits:
+        #     return
 
         # Initialise iterator with train data
         self.sess.run(dataset.val_init_op)
@@ -783,10 +783,12 @@ class ModelTrainer:
             val_path = join(model.saving_path, 'val_preds_{:d}'.format(self.training_epoch))
             if not exists(val_path):
                 makedirs(val_path)
-            files = dataset.train_files
+            # files = dataset.train_files
+            files = dataset.val_files
             i_val = 0
             for i, file_path in enumerate(files):
-                if dataset.all_splits[i] == dataset.validation_split:
+                # if dataset.all_splits[i] == dataset.validation_split:
+                if 1:
 
                     # Get points
                     points = dataset.load_evaluation_points(file_path)
